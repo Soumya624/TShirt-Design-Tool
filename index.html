@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>XFinityMedia</title>
+     <style>
+            .drawing-area{
+                position: absolute;
+                top: 60px;
+                left: 122px;
+                z-index: 10;
+                width: 200px;
+                height: 400px;
+            }
+
+            .canvas-container{
+                width: 200px; 
+                height: 400px; 
+                position: relative; 
+                user-select: none;
+            }
+
+            #tshirt-div{
+                width: 452px;
+                height: 548px;
+                position: relative;
+                background-color: #fff;
+            }
+
+            #canvas{
+                position: absolute;
+                width: 200px;
+                height: 400px; 
+                left: 0px; 
+                top: 0px; 
+                user-select: none; 
+                cursor: default;
+            }
+        </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">XFinityMedia</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Design Tool</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    <div class="container" style="padding: 20px 5px;">
+        <div class="card mb-3" style="max-width: auto;">
+            <div class="card-body">
+                <center><h4 class="card-title">Custom T-Shirt Design Tool</h4></center><br>
+                <div class="row" style="padding: 10px 0px;">
+                    <div class="col-md-4">
+			            <div id="tshirt-div">
+                            <!-- 
+                                Initially, the image will have the background tshirt that has transparency
+                                So we can simply update the color with CSS or JavaScript dinamically
+                            -->
+                            <div id= "tshirt-backgroundpicture">
+                                <img id="tshirt-backgroundpicture1" src="./background_tshirt.png" width="" />
+                                <img id="tshirt-backgroundpicture2" src="./red.png" width="" style="display: none"/>
+                                <img id="tshirt-backgroundpicture3" src="./blue.png" width=""  style="display: none;"/>
+                                <img id="tshirt-backgroundpicture4" src="./green.png" width=""  style="display: none;"/>
+                            </div>
+                            <div id="drawingArea" class="drawing-area">					
+                                <div class="canvas-container">
+                                    <canvas id="tshirt-canvas" width="250" height="400"></canvas>
+                                </div>
+                            </div>
+                            <center>
+                            <button type="button" class="btn btn-dark" onclick="function1()"></button>
+                            <button type="button" class="btn btn-danger" onclick="function2()"></button>
+                            <button type="button" class="btn btn-primary" onclick="function3()"></button>
+                            <button type="button" class="btn btn-success" onclick="function4()"></button>
+                            </center>
+                        </div>
+                        
+	                </div>
+	                <div class="col-md-4" style="padding: 2% 8%">
+                        <!-- The select that will allow the user to pick one of the static designs -->
+                        <label for="tshirt-design">T-Shirt Logo:</label>
+                        <select id="tshirt-design">
+                            <option value="">Select One of Our Logo</option>
+                            <option value="./batman.png">Batman</option>
+                        </select>
+                        <!-- The Select that allows the user to change the color of the T-Shirt -->
+                        <br><br>
+                        <label for="tshirt-text">T-Shirt Text:</label>
+                        <button type="button" id="tshirt-text" onclick="fun()" style="border: 1px solid black; border-radius: 3px;">Add Text</button>
+                        <br><br>
+                        <!--<label for="tshirt-color">T-Shirt Color:</label>
+                        <select id="tshirt-color">
+                            
+                            <option value="#fff">White</option>
+                            <option value="#000">Black</option>
+                            <option value="#f00">Red</option>
+                            <option value="#008000">Green</option>
+                            <option value="#ff0">Yellow</option>
+                        </select>-->
+                        <label for="tshirt-custompicture">Upload Your Own Design:</label>
+                        <input type="file" id="tshirt-custompicture" />
+                    </div>
+                    <div class="col-md-4" style="padding: 2% 1% 2% 0%">
+                        <form class="row g-3">
+                            <div class="col-md-6">
+                                <p style="text-align: center;">Size</p>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                                    <label class="form-check-label" for="flexCheckDefault1">
+                                      S
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+                                    <label class="form-check-label" for="flexCheckDefault2">
+                                      M
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
+                                    <label class="form-check-label" for="flexCheckDefault3">
+                                      L
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                                    <label class="form-check-label" for="flexCheckDefault4">
+                                      XL
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
+                                    <label class="form-check-label" for="flexCheckDefault5">
+                                      XXL
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                              <p style="text-align: center;">Quantity</p>
+                              <input type="number" class="form-control" id="inputPassword4" placeholder="Enter the Quantity">
+                            </div>
+                            
+                            <div class="col-12">
+                              <br>
+                              <center>
+                                <button type="" class="btn btn-primary">Preview</button>
+                                <button type="submit" class="btn btn-primary">Proceed</button></center>
+                            </div>
+                          </form>
+                    </div>
+                </div>    
+            </div>
+        </div>          
+    </div>
+    <!-- Include Fabric.js in the page -->
+    <script src="./fabric.min.js"></script>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+    <script>
+            var y=null;
+            let canvas = new fabric.Canvas('tshirt-canvas');
+
+            function updateTshirtImage(imageURL){
+                fabric.Image.fromURL(imageURL, function(img) {                   
+                    img.scaleToHeight(300);
+                    img.scaleToWidth(300); 
+                    canvas.centerObject(img);
+                    canvas.add(img);
+                    canvas.renderAll();
+                });
+            }
+            
+            // Update the TShirt color according to the selected color by the user
+            document.getElementById("tshirt-design").addEventListener("change", function(){
+                document.getElementById("tshirt-backgroundpicture").style.filter = this.value;
+            }, false);
+
+            // Update the TShirt color according to the selected color by the user
+            document.getElementById("tshirt-design").addEventListener("change", function(){
+
+                // Call the updateTshirtImage method providing as first argument the URL
+                // of the image provided by the select
+                y= (this.value);
+                updateTshirtImage(this.value);
+            }, false);
+
+            function fun() {
+                var x= prompt("Enter The Text:");
+                var text = new fabric.IText(x, { left: 40, top: 100, color: y });
+                canvas.add(text);
+            }
+           
+            // When the user clicks on upload a custom picture
+            document.getElementById('tshirt-custompicture').addEventListener("change", function(e){
+                var reader = new FileReader();
+                
+                reader.onload = function (event){
+                    var imgObj = new Image();
+                    imgObj.src = event.target.result;
+
+                    // When the picture loads, create the image in Fabric.js
+                    imgObj.onload = function () {
+                        var img = new fabric.Image(imgObj);
+
+                        img.scaleToHeight(300);
+                        img.scaleToWidth(300); 
+                        canvas.centerObject(img);
+                        canvas.add(img);
+                        canvas.renderAll();
+                    };
+                };
+
+                // If the user selected a picture, load it
+                if(e.target.files[0]){
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            }, false);
+
+            // When the user selects a picture that has been added and press the DEL key
+            // The object will be removed !
+            document.addEventListener("keydown", function(e) {
+                var keyCode = e.keyCode;
+
+                if(keyCode == 46){
+                    console.log("Removing selected element on Fabric.js on DELETE key !");
+                    canvas.remove(canvas.getActiveObject());
+                }
+            }, false);
+
+            function function1() {
+                document.getElementById("tshirt-backgroundpicture1").style.display="block";
+                document.getElementById("tshirt-backgroundpicture2").style.display="none";
+                document.getElementById("tshirt-backgroundpicture3").style.display="none";
+                document.getElementById("tshirt-backgroundpicture4").style.display="none";
+            }
+            function function2() {
+                document.getElementById("tshirt-backgroundpicture1").style.display="none";
+                document.getElementById("tshirt-backgroundpicture2").style.display="block";
+                document.getElementById("tshirt-backgroundpicture3").style.display="none";
+                document.getElementById("tshirt-backgroundpicture4").style.display="none";
+            }
+            function function3() {
+                document.getElementById("tshirt-backgroundpicture1").style.display="none";
+                document.getElementById("tshirt-backgroundpicture2").style.display="none";
+                document.getElementById("tshirt-backgroundpicture3").style.display="block";
+                document.getElementById("tshirt-backgroundpicture4").style.display="none";
+            }
+            function function4() {
+                document.getElementById("tshirt-backgroundpicture1").style.display="none";
+                document.getElementById("tshirt-backgroundpicture2").style.display="none";
+                document.getElementById("tshirt-backgroundpicture3").style.display="none";
+                document.getElementById("tshirt-backgroundpicture4").style.display="block";
+            }
+    </script>
+  </body>
+</html>
